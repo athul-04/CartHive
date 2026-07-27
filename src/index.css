@@ -5,6 +5,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
+
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Geist Variable', sans-serif;
@@ -117,12 +119,17 @@
     --sidebar-ring: oklch(0.556 0 0);
 }
 
+
+@theme{
+  --color-brand-primary: #6366F1;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
     }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background;
     }
   html {
     @apply font-sans;
