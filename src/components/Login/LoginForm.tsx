@@ -1,7 +1,8 @@
 
 import React from "react"
 import { Form, type ActionFunctionArgs,useActionData,NavLink } from "react-router-dom"
-import {MailIcon, Lock } from "lucide-react"
+import {MailIcon, Lock,Eye,EyeOff } from "lucide-react"
+import {useState} from "react"
 
 import {
   InputGroup,
@@ -16,10 +17,12 @@ import {
 } from "@/components/ui/field"
 const LoginForm=():React.ReactNode=>{
 
+    const [show,setShow]=useState<boolean>(false)
+
     const actionData=useActionData<typeof formAction>()
     if(actionData) console.log(actionData)
     return <>
-        <div className="flex flex-col items-center gap-5 pl-[5%]">
+        <div className="flex flex-col items-start gap-5 pl-[10%] pr-[8%]">
             <div className="w-full flex justify-end mt-[4%] pr-[4%]">
                 <p className=""> New here? <NavLink to=""><span className="text-brand-primary">Create Account</span></NavLink></p>
             </div>
@@ -30,35 +33,52 @@ const LoginForm=():React.ReactNode=>{
 
             </div>
         
-            <Form method="POST">
-                <Field className="max-w-sm">
-                    <FieldLabel htmlFor="email">Email address</FieldLabel>
-                    <InputGroup className="rounded-none">
-                        <InputGroupInput type="email" id="email" placeholder="Enter your email" />
-                        <InputGroupAddon>
-                            <MailIcon />
-                        </InputGroupAddon>
-                    </InputGroup>
-                </Field>
-                <Field className="max-w-sm">
-                    <FieldLabel htmlFor="password">Password</FieldLabel>
-                    <InputGroup>
-                        <InputGroupInput
-                            id="password"
-                            type="password"
-                            placeholder="Enter your password"
-                        />
-                        <InputGroupAddon>
-                            <Lock />
-                        </InputGroupAddon>
-                    </InputGroup>
-                </Field>
-                <input type="checkbox" id="remember" name="remember"/>
-                <label htmlFor="remember">Remember Me</label>
-                <button type="submit">Login</button>
-            </Form>
+            <div className="w-[80%]">
+                <Form method="POST">
+                    <Field className="mb-5">
+                        <FieldLabel htmlFor="email">Email address</FieldLabel>
+                        <InputGroup className="">
+                            <InputGroupInput type="email" id="email" placeholder="Enter your email" />
+                            <InputGroupAddon >
+                                <MailIcon />
+                            </InputGroupAddon>
+                        </InputGroup>
+                    </Field>
+                    <Field className="">
+                        <FieldLabel htmlFor="password">Password</FieldLabel>
+                        <InputGroup>
+                            <InputGroupInput
+                                id="password"
+                                type={show?"text":"password"}
+                                placeholder="Enter your password"
+                            />
+                            <InputGroupAddon>
+                                <Lock />
+                            </InputGroupAddon>
+                            <InputGroupAddon align="inline-end" className="cursor-pointer" onClick={()=>setShow(!show)}>
+                                {show ? <Eye/>:<EyeOff/>}
+                            </InputGroupAddon>
 
-            <NavLink to="">Forgot Password</NavLink>
+                        </InputGroup>
+                    </Field>
+                    <div className="flex justify-between mt-4">
+                        <div>
+                            <input type="checkbox" id="remember" name="remember"/>
+                            <label className="m-2" htmlFor="remember">Remember Me</label>
+                        </div>
+                        <div>
+                            <NavLink to="">Forgot Password</NavLink>
+                        </div>
+                    </div>
+                    <div className="flex justify-center w-full mt-5 h-10">
+                        <button className="rounded-lg border-2 w-full bg-brand-primary text-white" type="submit">Login</button>
+                    </div>
+                </Form>
+            </div>
+
+            <div className="w-[80%] text-center mt-8 text-bold">
+                <p className="text-[#A6A4A4]">By continuing, you agree to our <span className="text-brand-primary">Terms of Service</span><br/> and <span className="text-brand-primary">Privacy Policy</span></p>
+            </div>
 
         </div>
         
