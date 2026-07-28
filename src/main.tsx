@@ -1,10 +1,13 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
+import Login from "./components/Login/Login"
+import {createBrowserRouter,RouterProvider} from "react-router";
+import { formAction } from "./components/Login/LoginForm"
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const routes=createBrowserRouter([
+  {path:"/",Component:Login,action:formAction}
+])
+
+
+
+createRoot(document.getElementById('root')!).render(<RouterProvider router={routes}/>)
