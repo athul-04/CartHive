@@ -1,6 +1,6 @@
 
 import React from "react"
-import { Form, type ActionFunctionArgs,useActionData,NavLink } from "react-router-dom"
+import { Form, redirect, type ActionFunctionArgs,useActionData,NavLink } from "react-router-dom"
 import {MailIcon, Lock,Eye,EyeOff } from "lucide-react"
 import {useState} from "react"
 
@@ -21,6 +21,8 @@ const LoginForm=():React.ReactNode=>{
 
     const actionData=useActionData<typeof formAction>()
     if(actionData) console.log(actionData)
+
+        
     return <>
         <div className="flex flex-col items-start gap-5 pl-[10%] pr-[8%]">
             <div className="w-full flex justify-end mt-[4%] pr-[4%]">
@@ -34,11 +36,11 @@ const LoginForm=():React.ReactNode=>{
             </div>
         
             <div className="w-[80%]">
-                <Form method="POST">
+                <Form method="POST" >
                     <Field className="mb-5">
                         <FieldLabel htmlFor="email">Email address</FieldLabel>
                         <InputGroup className="">
-                            <InputGroupInput type="email" id="email" placeholder="Enter your email" />
+                            <InputGroupInput type="email" id="email" placeholder="Enter your email" name="email" />
                             <InputGroupAddon >
                                 <MailIcon />
                             </InputGroupAddon>
@@ -51,6 +53,7 @@ const LoginForm=():React.ReactNode=>{
                                 id="password"
                                 type={show?"text":"password"}
                                 placeholder="Enter your password"
+                                name="password"
                             />
                             <InputGroupAddon>
                                 <Lock />
@@ -91,6 +94,11 @@ export default LoginForm;
 
 export const formAction = async ({ request,params }:ActionFunctionArgs) => {
   const formData = await request.formData();
-  const entries=Object.fromEntries(formData)
-  return entries
+  
+  const entries=Object.fromEntries(formData);
+  if (Object.keys(entries).length==0){
+    return null
+  }
+  
+  return redirect("/homepage")
 }
