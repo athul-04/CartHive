@@ -35,9 +35,13 @@ const FacetValue=(props:FacetValueProps)=>{
   className={`
     flex h-10 items-center justify-center
     cursor-pointer my-2 w-[13rem] mx-auto pl-2 rounded-sm
-    transition-all duration-300 ease-in
+    transition-all duration-300 ease-in   shadow-sm
+            transition-all
+            duration-300
+            hover:shadow-md
+            
     ${checked
-      ? "bg-brand-background border-l-2 border-b-2 border-brand-primary shadow-sm"
+      ? "bg-brand-background border-l-3 border-b-3 border-brand-primary shadow-sm"
       : "hover:bg-slate-50 border-l-1 border-b-1"
     }
   `}
