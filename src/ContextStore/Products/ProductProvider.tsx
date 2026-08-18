@@ -11,11 +11,15 @@ type ProductType = {
 
 type ProductsContextType = {
   products: ProductType[];
+  updatedProductState: ProductType[];
+  setUpdatedProductState: React.Dispatch<React.SetStateAction<ProductType[]>>;
   setProducts: React.Dispatch<React.SetStateAction<ProductType[]>>;
 };
 
 const ProductsContext = createContext<ProductsContextType>({
   products: [],
+  updatedProductState:[],
+  setUpdatedProductState:()=>{},
   setProducts: () => {},
 });
 
@@ -23,9 +27,10 @@ const ProductsContext = createContext<ProductsContextType>({
 const ProductProvider=({children}:{children:ReactNode})=>{
 
     const [products,setProducts]=useState<ProductType[]>(Products);
+    const [updatedProductState,setUpdatedProductState]=useState<ProductType[]>(Products);
 
     return(
-            <ProductsContext.Provider value={{products,setProducts}}>
+            <ProductsContext.Provider value={{products,setProducts,updatedProductState,setUpdatedProductState}}>
                 {children}
             </ProductsContext.Provider>
     )
