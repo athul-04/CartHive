@@ -5,9 +5,11 @@ import FacetValue from "./FacetValue";
 import {FacetReducer,FACET_ACTION} from "../../../utils/FacetReducer"
 
 type ProductType = {
-  id: number;
-  name: string;
-  type: string;
+    name:string,
+    description:string,
+    imageUrl:string,
+    id:number,
+    type:string
 };
 
 
@@ -50,7 +52,7 @@ const CategoryFacet=()=>{
         }   
     },[FacetState])
 
-    console.log(updatedProductState)
+    // console.log(updatedProductState)
 
     const facetComponent=facets.map((facet)=>{
         return <FacetValue key={facet.value} value={facet.value} count={facet.count} dispatch={dispatch} />
@@ -61,8 +63,8 @@ const CategoryFacet=()=>{
             <div className="text-center pb-2">
                 <p className="text-lg font-semibold">Category Facet</p>
             </div>
-            <div className="px-10 ml-2">
-                <div className="border-2 rounded-lg w-[18rem] felx felx-col py-4">
+            <div className="px-10 ml-2 ">
+                <div className="border-2 rounded-lg w-[18rem] felx felx-col py-4 ">
                     <div className="my-4">{facetComponent}</div>
                 </div>
             </div>
