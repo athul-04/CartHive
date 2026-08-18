@@ -122,6 +122,7 @@
 
 @theme{
   --color-brand-primary: #6366F1;
+  --color-brand-background:#C7D2FE;
 }
 
 @layer base {

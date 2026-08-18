@@ -3,9 +3,11 @@ import './index.css'
 import Login from "./components/Login/Login"
 import {createBrowserRouter,RouterProvider} from "react-router";
 import { formAction } from "./components/Login/LoginForm"
+import HomePage from './components/HomePage/HomePage';
 
 const routes=createBrowserRouter([
-  {path:"/",Component:Login,action:formAction}
+  {path:"/",Component:Login,action:formAction},
+  {path:"/homepage",Component:HomePage}
 ])
 
 
